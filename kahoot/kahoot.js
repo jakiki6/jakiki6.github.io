@@ -69,3 +69,6 @@ function tableCreate(results) {
   body.appendChild(tbl)
 }
 
+function error() {
+	alert("Error!");
+}
