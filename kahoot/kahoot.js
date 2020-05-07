@@ -28,7 +28,7 @@ function check() {
 		error();
 		return;
 	}
-	fetch(base_url + pin, {headers: {"Origin":, "kahoot.it"}})
+	fetch(base_url + pin, {headers: {"Origin": "kahoot.it"}})
 	  .then(response => response.json())
 	  .then(data => {
 		if (data.includes("kahoot")) {
