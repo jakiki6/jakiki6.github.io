@@ -105,3 +105,17 @@ function stats () {
 	alert("Du hast " + String(score / max * 100) + "%  in einer Zeit von " + String(hours).padStart(2, "0") + ":" + String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0") + " erreicht!");
 	location.reload();
 }
+
+// Get the input field
+var input = document.getElementById("name");
+
+// Execute a function when the user releases a key on the keyboard
+input.addEventListener("keyup", function(event) {
+  // Number 13 is the "Enter" key on the keyboard
+  if (event.keyCode === 13) {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    document.getElementById("check").click();
+  }
+}); 
