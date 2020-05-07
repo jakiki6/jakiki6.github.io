@@ -18,7 +18,7 @@ input.addEventListener("keyup", function(event) {
 });
 
 var base_url = "https://kahoot.it/rest/challenges/pin/";
-var no_cors = "https://cors-anywhere.herokuapp.com/";
+var no_cors = "https://cors-escape.herokuapp.com/";
 
 function check() {
 	if (dirty) {
