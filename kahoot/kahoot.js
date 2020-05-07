@@ -23,7 +23,7 @@ function check() {
 		error();
 		return;
 	}
-	fetch(base_url + pin)
+	fetch(base_url + pin, {mode: "no-cors"})
 	  .then(response => response.json())
 	  .then(data => {
 		if (data.includes("kahoot")) {
