@@ -18,6 +18,7 @@ input.addEventListener("keyup", function(event) {
 });
 
 var base_url = "https://kahoot.it/rest/challenges/pin/";
+var no_cors = "https://cors-anywhere.herokuapp.com/";
 
 function check() {
 	if (dirty) {
@@ -28,7 +29,7 @@ function check() {
 		error();
 		return;
 	}
-	fetch(base_url + pin, {mode: "no-cors", headers: {"Origin": "kahoot.it"}})
+	fetch(no_cors + base_url + pin)
 	  .then(response => response.json())
 	  .then(data => {
 		if (data.includes("kahoot")) {
