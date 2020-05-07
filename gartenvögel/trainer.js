@@ -82,7 +82,8 @@ function trainer() {
 		document.getElementById("name").value = "";
 		alert("Richtig!");
 	} else {
-		if (birds.length == 0) { 
+		if (birds.length == 0) {
+			alert("Falsch!\nRichtig wäre: " + bird_choosen[1]);
                         stats();
                 }
 		alert("Falsch!\nRichtig wäre: " + bird_choosen[1]);

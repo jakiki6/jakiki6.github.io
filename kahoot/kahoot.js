@@ -23,15 +23,16 @@ function check() {
 		error();
 		return;
 	}
-	(new HttpClient()).get(base_url + pin, function(response) {
-		response = JSON.parse(response);
-		if (response.includes("kahoot")) {
-			response = response["kahoot"]["questions"];
+	fetch(base_url + pin)
+	  .then(response => response.json())
+	  .then(data => {
+		if (data.includes("kahoot")) {
+			data = data["kahoot"]["questions"];
 			var real = [];
-			for (var i = 0; i < response.length; i++) { // Question
-				for (var j = 0; j < response[i].length; j++) { // Answers
-					if (response[i][j]["correct"]) { // Correct?
-						real.push([response[i]["question"], response[i][j]["answer"]]);
+			for (var i = 0; i < data.length; i++) { // Question
+				for (var j = 0; j < data[i].length; j++) { // Answers
+					if (data[i][j]["correct"]) { // Correct?
+						real.push([data[i]["question"], data[i][j]["answer"]]);
 					}
 				}
 			}
@@ -68,15 +69,3 @@ function tableCreate(results) {
   body.appendChild(tbl)
 }
 
-var HttpClient = function() {
-    this.get = function(aUrl, aCallback) {
-        var anHttpRequest = new XMLHttpRequest();
-        anHttpRequest.onreadystatechange = function() { 
-            if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
-                aCallback(anHttpRequest.responseText);
-        }
-
-        anHttpRequest.open( "GET", aUrl, true );            
-        anHttpRequest.send( null );
-    }
-}
