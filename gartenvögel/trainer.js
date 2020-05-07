@@ -1,3 +1,10 @@
+/*
+	Note:
+	  - this project is mostly maintained in German -> the vast majority of code isn't in English
+	  - this is my first project with JavaScript and HTML
+
+*/
+
 var startDate = new Date();
 
 console.log("Are you sure you wanna cheat?\nCheating is bad!");
@@ -118,4 +125,4 @@ input.addEventListener("keyup", function(event) {
     // Trigger the button element with a click
     document.getElementById("check").click();
   }
-}); 
+});
