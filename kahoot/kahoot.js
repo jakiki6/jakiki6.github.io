@@ -1,6 +1,11 @@
 var input = document.getElementById("pin");
 var dirty = false;
 
+function error() {
+	alert("Error!");
+}
+
+
 // Execute a function when the user releases a key on the keyboard
 input.addEventListener("keyup", function(event) {
   // Number 13 is the "Enter" key on the keyboard
@@ -67,8 +72,4 @@ function tableCreate(results) {
   }
   tbl.appendChild(tbdy);
   body.appendChild(tbl)
-}
-
-function error() {
-	alert("Error!");
 }
