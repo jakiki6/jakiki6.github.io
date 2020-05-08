@@ -32,9 +32,9 @@ function check() {
 	var frame = document.getElementById("frame");
 	frame.src = base_url + pin;
 	delay(5000);
-	console.log(frame.value);
-	data = JSON.parse(frame.innerHTML);
-
+	var paste = document.getElementById("paste");
+	console.log(paste.value);
+	data = JSON.parse(paste.innerHTML);
 	if (data.includes("kahoot")) {
 		data = data["kahoot"]["questions"];
 		var real = [];
