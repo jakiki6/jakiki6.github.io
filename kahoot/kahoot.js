@@ -31,6 +31,8 @@ function check() {
 
 	var frame = document.getElementById("frame");
 	frame.src = base_url + pin;
+	delay(5000);
+	console.log(frame.value);
 	data = JSON.parse(frame.value);
 
 	if (data.includes("kahoot")) {
