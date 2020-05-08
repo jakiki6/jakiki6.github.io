@@ -1,6 +1,5 @@
 var input = document.getElementById("pin");
 var dirty = false;
-var frame = document.getElementById("frame");
 
 function error() {
 	alert("Error!");
@@ -30,6 +29,7 @@ function check() {
 		return;
 	}
 
+	var frame = document.getElementById("frame");
 	frame.src = base_url + pin;
 	data = JSON.parse(frame.value);
 
