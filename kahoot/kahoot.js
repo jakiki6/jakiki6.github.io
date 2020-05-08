@@ -1,5 +1,6 @@
 var input = document.getElementById("pin");
 var dirty = false;
+var frame = document.getElementById("frame");
 
 function error() {
 	alert("Error!");
@@ -18,7 +19,6 @@ input.addEventListener("keyup", function(event) {
 });
 
 var base_url = "https://kahoot.it/rest/challenges/pin/";
-var no_cors = "https://cors-escape.herokuapp.com/";
 
 function check() {
 	if (dirty) {
@@ -29,25 +29,25 @@ function check() {
 		error();
 		return;
 	}
-	fetch(no_cors + base_url + pin)
-	  .then(response => response.json())
-	  .then(data => {
-		if (data.includes("kahoot")) {
-			data = data["kahoot"]["questions"];
-			var real = [];
-			for (var i = 0; i < data.length; i++) { // Question
-				for (var j = 0; j < data[i].length; j++) { // Answers
-					if (data[i][j]["correct"]) { // Correct?
-						real.push([data[i]["question"], data[i][j]["answer"]]);
-					}
+
+	frame.src = base_url + pin;
+	data = JSON.parse(frame.value);
+
+	if (data.includes("kahoot")) {
+		data = data["kahoot"]["questions"];
+		var real = [];
+		for (var i = 0; i < data.length; i++) { // Question
+			for (var j = 0; j < data[i].length; j++) { // Answers
+				if (data[i][j]["correct"]) { // Correct?
+					real.push([data[i]["question"], data[i][j]["answer"]]);
 				}
 			}
-			tableCreate(results);
-		} else {
-			error();
-			return;
 		}
-	});
+		tableCreate(results);
+	} else {
+		error();
+		return;
+	}
 	return;
 }
 
