@@ -31,7 +31,8 @@ function check() {
 
 	var frame = document.getElementById("frame");
 	frame.src = base_url + pin;
-	delay(5000);
+	alert("Now copy and paste in 30s");
+	delay(30000);
 	var paste = document.getElementById("paste");
 	console.log(paste.value);
 	data = JSON.parse(paste.innerHTML);
