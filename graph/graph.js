@@ -9,7 +9,7 @@ function draw() {
 	var canvas = document.getElementById("canvas");
 	var ctx = canvas.getContext("2d");
 	ctx.fillStyle = "#FFFFFF";
-	ctx.strokeStyle = "#0000FF";
+	ctx.strokeStyle = "#000000";
 	var form = document.getElementById("form").value;
 	var maxX = document.getElementById("maxX").value;
 	var minX = document.getElementById("minX").value;
@@ -33,6 +33,8 @@ function draw() {
 	for (var x = minX; x <= maxX; x = x + step) {
 		eval(form);
 		drawLine(ctx, px, py, x, y);
+		px = x;
+		py = y;
 	}
 	alert("Done!");
 }
