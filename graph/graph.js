@@ -1,4 +1,8 @@
 function drawLine(ctx, startX, startY, endX, endY){
+    startX = startX + (ctx.width / 2);
+    endX = endX + (ctx.width / 2);
+    startY = startY + (ctx.height / 2);
+    endY = endY + (ctx.height / 2);
     ctx.beginPath();
     ctx.moveTo(startX,startY);
     ctx.lineTo(endX,endY);
