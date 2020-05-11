@@ -14,7 +14,7 @@ function draw() {
 	var ctx = canvas.getContext("2d");
 	ctx.fillStyle = "#FFFFFF";
 	ctx.strokeStyle = "#000000";
-	var form = document.getElementById("form").value;
+	var form = "y = " + document.getElementById("form").value;
 	var maxX = document.getElementById("maxX").value;
 	var minX = document.getElementById("minX").value;
 	var step = document.getElementById("step").value;
@@ -39,6 +39,7 @@ function draw() {
 		drawLine(ctx, px, py, x, y);
 		px = x;
 		py = y;
+		console.log(x, y)
 	}
 	alert("Done!");
 }
