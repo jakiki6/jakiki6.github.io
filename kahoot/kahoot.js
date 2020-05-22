@@ -31,12 +31,12 @@ function check() {
 
 	var frame = document.getElementById("frame");
 	frame.src = base_url + pin;
-	alert("Now copy and paste in 30s");
+	alert("Now copy and paste");
 }
 function gen() {
 	var paste = document.getElementById("paste");
 	console.log(paste.value);
-	data = JSON.parse(paste.innerHTML);
+	data = JSON.parse(paste.value);
 	if (data.includes("kahoot")) {
 		data = data["kahoot"]["questions"];
 		var real = [];
