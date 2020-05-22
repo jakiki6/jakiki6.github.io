@@ -32,7 +32,8 @@ function check() {
 	var frame = document.getElementById("frame");
 	frame.src = base_url + pin;
 	alert("Now copy and paste in 30s");
-	delay(30000);
+}
+function gen() {
 	var paste = document.getElementById("paste");
 	console.log(paste.value);
 	data = JSON.parse(paste.innerHTML);
@@ -76,12 +77,4 @@ function tableCreate(results) {
   }
   tbl.appendChild(tbdy);
   body.appendChild(tbl)
-}
-
-function delay(ms){
-   var start = new Date().getTime();
-   var end = start;
-   while(end < start + ms) {
-     end = new Date().getTime();
-  }
 }
