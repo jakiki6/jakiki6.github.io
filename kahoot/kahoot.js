@@ -1,5 +1,5 @@
 var input = document.getElementById("pin");
-var dirty = false;
+
 
 function error() {
 	alert("Error!");
@@ -20,14 +20,7 @@ input.addEventListener("keyup", function(event) {
 var base_url = "https://kahoot.it/rest/challenges/pin/";
 
 function check() {
-	if (dirty) {
-		location.reload();
-	}
 	var pin = document.getElementById("pin").value;
-	if (pin.length != 6) {
-		error();
-		return;
-	}
 
 	var frame = document.getElementById("frame");
 	frame.src = base_url + pin;
