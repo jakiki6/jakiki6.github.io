@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Packages
-sudo apt install python3 curl jupp git cmatrix nasm gcc dosbox qemu-kvm python3-pip cifs tig gitk mksh
+sudo apt install python3 curl jupp git cmatrix nasm gcc dosbox qemu-kvm python3-pip cifs tig gitk mksh mumble firefox
 
 # Python
 pip3 install PIL numpy networkx pandas matplotlib tensorflow
@@ -24,4 +24,4 @@ cd Wurst7
 git reset --hard
 cd
 
-
+# Why do you read this?
