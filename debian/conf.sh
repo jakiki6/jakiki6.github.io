@@ -34,7 +34,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ~/.cargo/bin/cargo install b3sum
 install -m 755 ~/.cargo/bin/* /bin/
 
-if ["df /boot | tail -n +2 | awk '{print $1}'" -e "df / | tail -n +2 | awk '{print $1}'"]; then
+if ["df /boot | tail -n +2 | awk '{print \$1}'" -e "df / | tail -n +2 | awk '{print \$1}'"]; then
 	echo Error, no boot partition!
 	exit 1
 fi
@@ -48,7 +48,7 @@ echo hash = $(b3sum $p) > /sbin/verity
 chmod +x /sbin/verity
 
 cat >> /sbin/verity <<EOF
-if [ "$(b3sum $(df /boot | tail -n +2 | awk '{print $1}'))" -ne $hash]; then
+if [ "$(b3sum $(df /boot | tail -n +2 | awk '{print \$1}'))" -ne $hash]; then
 	shutdown 0
 fi
 EOF
