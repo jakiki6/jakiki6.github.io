@@ -50,8 +50,8 @@ chmod +x /sbin/verity
 
 cat << EOF >> /sbin/verity
 
-if [ "\$(cat \$(df /boot | tail -n +2 | awk '{ print \$1 }') | b3sum | sed -e \"s/ -//g\")" != "\$hash" ]; then
-	echo
+if [ "\$(cat \$(df /boot | tail -n +2 | awk '{ print \$1 }') | b3sum | sed -e 's/ -//g')" != "\$hash" ]; then
+	echo Everything ok
 else
 	echo 64 > /proc/sysrq-trigger
 fi
