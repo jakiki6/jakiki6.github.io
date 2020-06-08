@@ -66,6 +66,9 @@ path = df /boot | tail -n +2 | awk '{print $1}' | sed -ie 's/\//\\\//g'
 
 sed -ie '/^$path/ s/defaults/defaults,ro/' /etc/fstab
 
+echo Done ...
+sleep 30
+
 reboot
 
 # Why do you read this?
