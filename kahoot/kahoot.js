@@ -22,9 +22,10 @@ var base_url = "https://kahoot.it/rest/challenges/pin/";
 function check() {
 	var pin = document.getElementById("pin").value;
 
-	var frame = document.getElementById("frame");
+	var frame = document.getElementById("paste");
 	frame.src = base_url + pin;
-	alert("Now copy and paste");
+	delay(1000);
+	gen();
 }
 function gen() {
 	var paste = document.getElementById("paste");
