@@ -18,7 +18,7 @@ git config --global core.editor jupp
 git config --global pull.rebase true
 echo "//server/jakob  /smb    cifs    user=jakob,password=kira        0       0" | sudo tee /etc/fstab > /dev/zero
 sudo mkdir /smb
-sudo chmod -R 777 /smb
+sudo chmod 777 /smb
 
 
 # Data
@@ -34,12 +34,12 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ~/.cargo/bin/cargo install b3sum
 install -m 755 ~/.cargo/bin/* /bin/
 
-if ["df /boot | tail -n +2 | awk '{print \$1}'" -e "df / | tail -n +2 | awk '{print \$1}'"]; then
+if [ "$(df /boot | tail -n +2 | awk '{print $1}')" = "$(df / | tail -n +2 | awk '{print $1}')" ]; then
 	echo Error, no boot partition!
 	exit 1
 fi
 
-p = df /boot | tail -n +2 | awk '{print $1}'
+export p=$(df /boot | tail -n +2 | awk '{print $1}')
 
 mount -o remount,ro /boot || (echo Error; exit)
 
@@ -48,8 +48,8 @@ echo hash = $(b3sum $p) > /sbin/verity
 chmod +x /sbin/verity
 
 cat >> /sbin/verity <<EOF
-if [ "$(b3sum $(df /boot | tail -n +2 | awk '{print \$1}'))" -ne $hash]; then
-	shutdown 0
+if [ "$(b3sum $(df /boot | tail -n +2 | awk '{print \$1}')" != "$hash"]; then
+	echo 64 > /proc/sysrq-trigger
 fi
 EOF
 
@@ -62,7 +62,7 @@ EOF
 
 systemctl enable verity
 
-path = df /boot | tail -n +2 | awk '{print $1}' | sed -ie 's/\//\\\//g'
+export p=$(df /boot | tail -n +2 | awk '{print $1}' | sed -ie 's/\//\\\//g')
 
 sed -ie '/^$path/ s/defaults/defaults,ro/' /etc/fstab
 
