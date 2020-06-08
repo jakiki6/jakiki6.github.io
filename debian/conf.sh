@@ -23,11 +23,7 @@ cd
 git clone https://github.com/jakiki6/bootOS.git
 git clone https://github.com/jakiki6/jakiki6.github.io
 sudo mount -a
-mkdir Wurst7
-cp /smb/Wurst7/.git Wurst7/
-cd Wurst7
-git reset --hard
-cd
+
 
 # Create
 
