@@ -68,7 +68,7 @@ systemctl enable verity
 
 export p=$(df /boot | tail -n +2 | awk '{ print $1 }' | sed -e 's/\//\\\//g')
 
-cat /etc/fstab | sed -e '/^$p/ s/defaults/defaults,ro/' > /etc/f
+cat /etc/fstab | sed -e '/\/boot/ s/defaults/defaults,ro/' > /etc/f
 mv /etc/f /etc/fstab
 
 echo Done ...
