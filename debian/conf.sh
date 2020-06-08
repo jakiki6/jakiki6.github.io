@@ -43,7 +43,7 @@ export p=$(df /boot | tail -n +2 | awk '{print $1}')
 
 mount -o remount,ro /boot || (echo Error; exit)
 
-echo hash = $(b3sum $p) > /sbin/verity
+echo export hash=$(b3sum $p) > /sbin/verity
 
 chmod +x /sbin/verity
 
