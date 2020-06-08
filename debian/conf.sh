@@ -17,6 +17,9 @@ git config --global user.email "jakob.kirsch@web.de"
 git config --global core.editor jupp
 git config --global pull.rebase true
 echo "//server/jakob  /smb    cifs    user=jakob,password=kira        0       0" | sudo tee /etc/fstab > /dev/zero
+sudo mkdir /smb
+sudo chmod -R 777 /smb
+
 
 # Data
 cd
