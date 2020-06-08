@@ -34,26 +34,26 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ~/.cargo/bin/cargo install b3sum
 install -m 755 ~/.cargo/bin/* /bin/
 
-if [ "$(df /boot | tail -n +2 | awk '{print $1}')" = "$(df / | tail -n +2 | awk '{print $1}')" ]; then
+if [ "$(df /boot | tail -n +2 | awk '{ print $1 }')" = "$(df / | tail -n +2 | awk '{ print $1 }')" ]; then
 	echo Error, no boot partition!
 	exit 1
 fi
 
-export p=$(df /boot | tail -n +2 | awk '{print $1}')
+export p=$(df /boot | tail -n +2 | awk '{ print $1 }')
 
 mount -o remount,ro /boot || (echo Error; exit)
 
-echo export hash=$(b3sum $p) > /sbin/verity
+echo export hash=$(cat $p | b3sum) > /sbin/verity
 
 chmod +x /sbin/verity
 
-cat > /sbin/verity << EOF
-if [ "$(b3sum $(df /boot | tail -n +2 | awk \"{print \$1}\")" != "$hash"]; then
+cat << EOF > /sbin/verity
+if [ "$(cat $(df /boot | tail -n +2 | awk '{ print $1 }') | b3sum)" != "$hash"]; then
 	echo 64 > /proc/sysrq-trigger
 fi
 EOF
 
-cat > /etc/systemd/system/verity.service << EOF
+cat <<EOF > /etc/systemd/system/verity.service
 [Service]
 ExecStart=/sbin/verity
 [Install]
@@ -62,7 +62,7 @@ EOF
 
 systemctl enable verity
 
-export p=$(df /boot | tail -n +2 | awk '{print $1}' | sed -e 's/\//\\\//g')
+export p=$(df /boot | tail -n +2 | awk '{ print $1 }' | sed -e 's/\//\\\//g')
 
 cat /etc/fstab | sed -e '/^$p/ s/defaults/defaults,ro/' > /etc/f
 mv /etc/f /etc/fstab
