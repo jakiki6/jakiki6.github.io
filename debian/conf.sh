@@ -47,13 +47,13 @@ echo export hash=$(cat $p | b3sum) > /sbin/verity
 
 chmod +x /sbin/verity
 
-cat << EOF > /sbin/verity
-if [ "$(cat $(df /boot | tail -n +2 | awk '{ print $1 }') | b3sum)" != "$hash"]; then
+cat << EOF >> /sbin/verity
+if [ "\$(cat $(df /boot | tail -n +2 | awk '{ print \$1 }') | b3sum)" != "\$hash"]; then; else
 	echo 64 > /proc/sysrq-trigger
 fi
 EOF
 
-cat <<EOF > /etc/systemd/system/verity.service
+cat << EOF > /etc/systemd/system/verity.service
 [Service]
 ExecStart=/sbin/verity
 [Install]
