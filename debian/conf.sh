@@ -39,7 +39,7 @@ if [ "$(df /boot | tail -n +2 | awk '{ print $1 }')" = "$(df / | tail -n +2 | aw
 	exit 1
 fi
 
-export p=$(df /boot | tail -n +2 | awk '{ print $1 }')
+export p=$(df /boot | tail -n +2 | vut -d" " -f1)
 
 mount -o remount,ro /boot || (echo Error; exit)
 
@@ -50,7 +50,7 @@ chmod +x /sbin/verity
 
 cat << EOF >> /sbin/verity
 
-if [ "\$(cat \$(df /boot | tail -n +2 | awk '{ print \$1 }') | b3sum | sed -e 's/ -//g')" != "\$hash" ]; then
+if [ "\$(cat \$(df /boot | tail -n +2 | cut -d' ' -f1) | b3sum | sed -e 's/ -//g')" != "\$hash" ]; then
 	echo Everything ok
 else
 	echo 64 > /proc/sysrq-trigger
@@ -66,7 +66,7 @@ EOF
 
 systemctl enable verity
 
-export p=$(df /boot | tail -n +2 | awk '{ print $1 }' | sed -e 's/\//\\\//g')
+export p=$(df /boot | tail -n +2 | cut -d" " -f1 | sed -e 's/\//\\\//g')
 
 cat /etc/fstab | sed -e '/\/boot/ s/defaults/defaults,ro/' > /etc/f
 mv /etc/f /etc/fstab
