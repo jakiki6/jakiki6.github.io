@@ -6,7 +6,7 @@ if [ "$EUID" -ne 0 ]
 fi
 
 # Packages
-apt install python3 curl jupp git cmatrix nasm gcc dosbox qemu-kvm python3-pip cifs tig gitk mksh mumble firefox
+apt install python3 curl jupp git cmatrix nasm gcc dosbox qemu-kvm python3-pip cifs tig gitk mksh mumble firefox-esr || (echo Error!; exit 1)
 
 # Python
 pip3 install PIL numpy networkx pandas matplotlib tensorflow
