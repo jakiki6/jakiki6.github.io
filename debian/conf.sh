@@ -16,7 +16,7 @@ git config --global user.name "Jakob Kirsch"
 git config --global user.email "jakob.kirsch@web.de"
 git config --global core.editor jupp
 git config --global pull.rebase true
-echo "//server/jakob  /smb    cifs    user=jakob,password=kira        0       0" | sudo tee /etc/fstab > /dev/zero
+echo "//server/jakob  /smb    cifs    user=jakob,password=kira        0       0" >> /etc/fstab
 sudo mkdir /smb
 sudo chmod 777 /smb
 
@@ -47,13 +47,13 @@ echo export hash=$(b3sum $p) > /sbin/verity
 
 chmod +x /sbin/verity
 
-cat >> /sbin/verity <<EOF
-if [ "$(b3sum $(df /boot | tail -n +2 | awk '{print \$1}')" != "$hash"]; then
+cat > /sbin/verity << EOF
+if [ "$(b3sum $(df /boot | tail -n +2 | awk \"{print \$1}\")" != "$hash"]; then
 	echo 64 > /proc/sysrq-trigger
 fi
 EOF
 
-cat > /etc/systemd/system/verity.service <<EOF
+cat > /etc/systemd/system/verity.service << EOF
 [Service]
 ExecStart=/sbin/verity
 [Install]
@@ -62,9 +62,10 @@ EOF
 
 systemctl enable verity
 
-export p=$(df /boot | tail -n +2 | awk '{print $1}' | sed -ie 's/\//\\\//g')
+export p=$(df /boot | tail -n +2 | awk '{print $1}' | sed -e 's/\//\\\//g')
 
-sed -ie '/^$path/ s/defaults/defaults,ro/' /etc/fstab
+cat /etc/fstab | sed -e '/^$p/ s/defaults/defaults,ro/' > /etc/f
+mv /etc/f /etc/fstab
 
 echo Done ...
 sleep 30
