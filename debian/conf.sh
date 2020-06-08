@@ -9,7 +9,7 @@ fi
 apt install python3 curl jupp git cmatrix nasm gcc dosbox qemu-kvm python3-pip cifs-utils tig gitk mksh mumble firefox-esr linux-headers-$(uname -r)
 
 # Python
-pip3 install PIL numpy networkx pandas matplotlib tensorflow
+pip3 install pillow numpy networkx pandas matplotlib tensorflow
 
 # Config
 git config --global user.name "Jakob Kirsch"
@@ -48,7 +48,8 @@ echo export hash=$(cat $p | b3sum) > /sbin/verity
 chmod +x /sbin/verity
 
 cat << EOF >> /sbin/verity
-if [ "\$(cat $(df /boot | tail -n +2 | awk '{ print \$1 }') | b3sum)" != "\$hash"]; then; else
+
+if [ "\$(cat \$(df /boot | tail -n +2 | awk '{ print \$1 }') | b3sum)" != "\$hash"]; then; else
 	echo 64 > /proc/sysrq-trigger
 fi
 EOF
