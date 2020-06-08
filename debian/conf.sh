@@ -43,13 +43,14 @@ export p=$(df /boot | tail -n +2 | awk '{ print $1 }')
 
 mount -o remount,ro /boot || (echo Error; exit)
 
-echo export hash=$(cat $p | b3sum) > /sbin/verity
+echo \#!/bin/bash > /sbin/verity
+echo export hash=$(cat $p | b3sum | sed -e "s/ -//g") >> /sbin/verity
 
 chmod +x /sbin/verity
 
 cat << EOF >> /sbin/verity
 
-if [ "\$(cat \$(df /boot | tail -n +2 | awk '{ print \$1 }') | b3sum)" != "\$hash"]; then; else
+if [ "\$(cat \$(df /boot | tail -n +2 | awk '{ print \$1 }') | b3sum | sed -e \"s/ -//g\")" != "\$hash"]; then; else
 	echo 64 > /proc/sysrq-trigger
 fi
 EOF
