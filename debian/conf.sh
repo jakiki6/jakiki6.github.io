@@ -9,7 +9,7 @@ fi
 apt install python3 curl jupp git cmatrix nasm gcc dosbox qemu-kvm python3-pip cifs-utils tig gitk mksh mumble firefox-esr linux-headers-$(uname -r)
 
 # Python
-pip3 install pillow numpy networkx pandas matplotlib tensorflow
+pip3 install pillow numpy networkx matplotlib
 
 # Config
 git config --global user.name "Jakob Kirsch"
@@ -39,7 +39,7 @@ if [ "$(df /boot | tail -n +2 | awk '{ print $1 }')" = "$(df / | tail -n +2 | aw
 	exit 1
 fi
 
-export p=$(df /boot | tail -n +2 | vut -d" " -f1)
+export p=$(df /boot | tail -n +2 | cut -d" " -f1)
 
 mount -o remount,ro /boot || (echo Error; exit)
 
