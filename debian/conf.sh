@@ -1,7 +1,12 @@
 #!/bin/bash
 
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
 # Packages
-sudo apt install python3 curl jupp git cmatrix nasm gcc dosbox qemu-kvm python3-pip cifs tig gitk mksh mumble firefox
+apt install python3 curl jupp git cmatrix nasm gcc dosbox qemu-kvm python3-pip cifs tig gitk mksh mumble firefox
 
 # Python
 pip3 install PIL numpy networkx pandas matplotlib tensorflow
