@@ -53,6 +53,7 @@ cat << EOF >> /sbin/verity
 if [ "\$(cat \$(df /boot | tail -n +2 | cut -d' ' -f1) | b3sum | sed -e 's/ -//g')" = \$hash ]; then
 	echo Everything ok
 else
+	echo 1 > /proc/sys/kernel/sysrq
 	echo e > /proc/sysrq-trigger
 fi
 EOF
