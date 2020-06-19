@@ -44,13 +44,13 @@ export p=$(df /boot | tail -n +2 | cut -d" " -f1)
 mount -o remount,ro /boot || (echo Error; exit)
 
 echo \#!/bin/bash > /sbin/verity
-echo export hash=$(cat $p | b3sum | sed -e "s/ -//g") >> /sbin/verity
+echo export hash=$(cat $p | b3sum | sha256sum) >> /sbin/verity
 
 chmod +x /sbin/verity
 
 cat << EOF >> /sbin/verity
 
-if [ "\$(cat \$(df /boot | tail -n +2 | cut -d' ' -f1) | b3sum | sed -e 's/ -//g')" = \$hash ]; then
+if [ "\$(cat \$(df /boot | tail -n +2 | cut -d' ' -f1) | b3sum | sha256sum)" != "\$hash" ]; then
 	echo Everything ok
 else
 	echo 1 > /proc/sys/kernel/sysrq
