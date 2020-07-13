@@ -53,6 +53,8 @@ cat << EOF >> /sbin/verity
 if [ "\$(cat \$(df /boot | tail -n +2 | cut -d' ' -f1) | b3sum | base64 -w 0 | cut -d' ' -f1)" = "\$hash" ]; then
 	echo Everything ok
 else
+	echo > /dev/tty1
+	echo Verity violation!
 	echo 1 > /proc/sys/kernel/sysrq
 	echo e > /proc/sysrq-trigger
 fi
@@ -69,7 +71,7 @@ systemctl enable verity
 
 export p=$(df /boot | tail -n +2 | cut -d" " -f1 | sed -e 's/\//\\\//g')
 
-cat /etc/fstab | sed -e '/\/boot/ s/defaults/defaults,ro/' > /etc/f
+cat /etc/fstab | sed -e '/\/boot/ s/defaults/ro/' > /etc/f
 mv /etc/f /etc/fstab
 
 echo Done ...
