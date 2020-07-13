@@ -50,7 +50,7 @@ chmod +x /sbin/verity
 
 cat << EOF >> /sbin/verity
 
-if [ "\$(cat \$(df /boot | tail -n +2 | cut -d' ' -f1) | b3sum | base64 -w 0 | cut -d' ' -f1)" = "\$hash" ]; then
+if [ \$(cat \$(df /boot | tail -n +2 | cut -d' ' -f1) | b3sum | base64 -w 0 | cut -d' ' -f1) = \$hash ]; then
 	echo Everything ok
 else
 	echo > /dev/tty1
