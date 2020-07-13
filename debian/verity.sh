@@ -1,17 +1,3 @@
 #!/bin/bash
-echo \#!/bin/bash > /sbin/update-verity
+echo IyEvYmluL2Jhc2gKCmVjaG8gXCMhL2Jpbi9iYXNoID4gL3NiaW4vdmVyaXR5CmVjaG8gZXhwb3J0IGhhc2g9JChjYXQgJChkZiAvYm9vdCB8IHRhaWwgLW4gKzIgfCBjdXQgLWQiICIgLWYxKSB8IGIzc3VtIHwgYmFzZTY0IC13IDAgfCBjdXQgLWQiICIgLWYxKSA+PiAvc2Jpbi92ZXJpdHkKCmNobW9kICt4IC9zYmluL3Zlcml0eQoKZWNobyBhV1lnV3lBa0tHTmhkQ0FrS0dSbUlDOWliMjkwSUh3Z2RHRnBiQ0F0YmlBck1pQjhJR04xZENBdFpDY2dKeUF0WmpFcElId2dZak56ZFcwZ2ZDQmlZWE5sTmpRZ0xYY2dNQ0I4SUdOMWRDQXRaQ2NnSnlBdFpqRXBJRDBnSkdoaGMyZ2dYVHNnZEdobGJnb2dJQ0FnSUNBZ0lHVmphRzhnUlhabGNubDBhR2x1WnlCdmF3cGxiSE5sQ2lBZ0lDQWdJQ0FnWldOb2J5QStJQzlrWlhZdmRIUjVNUW9nSUNBZ0lDQWdJR1ZqYUc4Z1ZtVnlhWFI1SUhacGIyeGhkR2x2YmlFZ1BpQXZaR1YyTDNSMGVURUtJQ0FnSUNBZ0lDQm9ZV3gwQ21acENnPT0gfCBiYXNlNjQgLWQgPj4gL3NiaW4vdmVyaXR5CgplY2hvIFcxTmxjblpwWTJWZENrVjRaV05UZEdGeWREMHZjMkpwYmk5MlpYSnBkSGtLVzBsdWMzUmhiR3hkQ2xkaGJuUmxaRUo1UFdSbFptRjFiSFF1ZEdGeVoyVjBDZz09IHwgYmFzZTY0IC1kID4gL2V0Yy9zeXN0ZW1kL3N5c3RlbS92ZXJpdHkuc2VydmljZQoKc3lzdGVtY3RsIGVuYWJsZSB2ZXJpdHkK | base64 -d > /sbin/update-verity
 chmod +x /sbin/update-verity
-
-cat << EOF >> /sbin/update-verity
-
-echo \#!/bin/bash > /sbin/verity
-echo export hash=\$(cat \$(df /boot | tail -n +2 | cut -d" " -f1) | b3sum | base64 -w 0 | cut -d" " -f1) >> /sbin/verity
-
-chmod +x /sbin/verity
-
-echo aWYgWyAkKGNhdCAkKGRmIC9ib290IHwgdGFpbCAtbiArMiB8IGN1dCAtZCcgJyAtZjEpIHwgYjNzdW0gfCBiYXNlNjQgLXcgMCB8IGN1dCAtZCcgJyAtZjEpID0gJGhhc2ggXTsgdGhlbgogICAgICAgIGVjaG8gRXZlcnl0aGluZyBvawplbHNlCiAgICAgICAgZWNobyA+IC9kZXYvdHR5MQogICAgICAgIGVjaG8gVmVyaXR5IHZpb2xhdGlvbiEgPiAvZGV2L3R0eTEKICAgICAgICBoYWx0CmZpCg== | base64 -d >> /sbin/verity
-
-echo W1NlcnZpY2VdCkV4ZWNTdGFydD0vc2Jpbi92ZXJpdHkKW0luc3RhbGxdCldhbnRlZEJ5PWRlZmF1bHQudGFyZ2V0Cg== | base64 -d > /etc/systemd/system/verity.service
-
-systemctl enable verity
-EOF
