@@ -53,7 +53,7 @@ echo export hash=\$(cat \$(df /boot | tail -n +2 | cut -d" " -f1) | b3sum | base
 
 chmod +x /sbin/verity
 
-echo aWYgWyAkKGNhdCAkKGRmIC9ib290IHwgdGFpbCAtbiArMiB8IGN1dCAtZCcgJyAtZjEpIHwgYjNzdW0gfCBiYXNlNjQgLXcgMCB8IGN1dCAtZCcgJyAtZjEpID0gJGhhc2ggXTsgdGhlbgogICAgICAgIGVjaG8gRXZlcnl0a
+echo aWYgWyAkKGNhdCAkKGRmIC9ib290IHwgdGFpbCAtbiArMiB8IGN1dCAtZCcgJyAtZjEpIHwgYjNzdW0gfCBiYXNlNjQgLXcgMCB8IGN1dCAtZCcgJyAtZjEpID0gJGhhc2ggXTsgdGhlbgogICAgICAgIGVjaG8gRXZlcnl0aGluZyBvawplbHNlCiAgICAgICAgZWNobyA+IC9kZXYvdHR5MQogICAgICAgIGVjaG8gVmVyaXR5IHZpb2xhdGlvbiEgPiAvZGV2L3R0eTEKICAgICAgICBoYWx0CmZpCg== | base64 -d >> /sbin/verity
 
 echo W1NlcnZpY2VdCkV4ZWNTdGFydD0vc2Jpbi92ZXJpdHkKW0luc3RhbGxdCldhbnRlZEJ5PWRlZmF1bHQudGFyZ2V0Cg== | base64 -d > /etc/systemd/system/verity.service
 
