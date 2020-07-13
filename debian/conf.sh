@@ -34,7 +34,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ~/.cargo/bin/cargo install b3sum
 install -m 755 ~/.cargo/bin/* /bin/
 
-if [ "$(df /boot | tail -n +2 | awk '{ print $1 }')" = "$(df / | tail -n +2 | awk '{ print $1 }')" ]; then
+if [ $(df /boot | tail -n +2 | awk '{ print $1 }') = $(df / | tail -n +2 | awk '{ print $1 }') ]; then
 	echo Error, no boot partition!
 	exit 1
 fi
