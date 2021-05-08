@@ -1,7 +1,7 @@
 #!/bin/bash
 
-$FS=ext4
-$MNTPATH=/mnt
+export FS="ext4"
+export MNTPATH="/mnt"
 
 if [ "$EUID" != "0" ]; then
         echo Please run this with root
@@ -46,9 +46,9 @@ mount $partition $MNTPATH
 
 echo Copying data
 umask 022
-rsync --links -rv --exclude=$MNTPATH --exclude=$1 --exclude=/dev --exclude=/proc --exclude=/sys --exclude=/tmp --exclude=/media --exclude=/run / $MNTPATH/
+rsync --links -rv --exclude=$MNTPATH --exclude=$1 --exclude=/dev --exclude=/proc --exclude=/sys --exclude=/media --exclude=/run / $MNTPATH/
 
-for v in dev proc sys tmp media run; do
+for v in dev proc sys media run; do
         mkdir $MNTPATH/$v
         mount --bind /$v $MNTPATH/$v
 done
@@ -56,7 +56,7 @@ done
 echo Writing new fstab
 (
 echo "# <file system> <mount point>   <type>  <options>       <dump>  <pass>"
-echo "UUID=$partition_id \t$FS\terrors=remount-ro\t0\t1"
+echo -e "UUID=$partition_id \t$FS\tdefaults\t0\t1"
 ) > $MNTPATH/etc/fstab
 
 echo Installing grub
@@ -64,10 +64,7 @@ chroot $MNTPATH /sbin/grub-install --recheck --no-floppy --root-directory=/ $dev
 chroot $MNTPATH /sbin/update-grub
 
 echo Unmounting
-for v in dev proc sys tmp media run; do
-        umount $MNTPATH/$v
-done
+umount -A --recursive $MNTPATH
 sync
-umount $MNTPATH
 
 echo Done
