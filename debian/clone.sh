@@ -18,6 +18,11 @@ head -c 512 $1 > /dev/zero || (
 	echo "Error" && exit
 )
 
+export device=$(losetup --show -fP $1 | tr -d '\n')
+
+echo Wiping drive
+dd if=/dev/zero of=$device
+
 echo Creating partition table
 (
 echo o
@@ -27,9 +32,8 @@ echo
 echo
 echo
 echo w
-) | fdisk $1
+) | fdisk $device
 
-export device=$(losetup --show -fP $1 | tr -d '\n')
 export partition=$(echo $(echo -n $device)p1)
 
 if [ "$partition" = "" ]; then
