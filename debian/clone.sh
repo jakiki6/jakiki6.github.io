@@ -1,5 +1,8 @@
 #!/bin/bash
 
+$FS=ext4
+$MNTPATH=/mnt
+
 if [ "$EUID" != "0" ]; then
         echo Please run this with root
         exit 1
@@ -11,7 +14,9 @@ if [ "$1" = "" ]; then
 fi
 
 echo Test for existing device
-head -c 512 $1 > /dev/zero
+head -c 512 $1 > /dev/zero || (
+	echo "Error" && exit
+)
 
 echo Creating partition table
 (
@@ -33,29 +38,36 @@ if [ "$partition" = "" ]; then
 fi
 
 echo Formatting
-mkfs.ext4 $partition
+mkfs.$FS $partition
+partition_id=$(blkid -o value -s UUID $partition)
 
 echo Mounting
-mount $partition /mnt
+mount $partition $MNTPATH
 
 echo Copying data
 umask 022
-rsync --links -rv --exclude=/mnt --exclude=$1 --exclude=/dev --exclude=/proc --exclude=/sys --exclude=/tmp --exclude=/media --exclude=/run / /mnt/
+rsync --links -rv --exclude=$MNTPATH --exclude=$1 --exclude=/dev --exclude=/proc --exclude=/sys --exclude=/tmp --exclude=/media --exclude=/run / $MNTPATH/
 
 for v in dev proc sys tmp media run; do
-        mkdir /mnt/$v
-        mount --bind /$v /mnt/$v
+        mkdir $MNTPATH/$v
+        mount --bind /$v $MNTPATH/$v
 done
 
+echo Writing new fstab
+(
+echo "# <file system> <mount point>   <type>  <options>       <dump>  <pass>"
+echo "UUID=$partition_id \t$FS\terrors=remount-ro\t0\t1"
+) > $MNTPATH/etc/fstab
+
 echo Installing grub
-chroot /mnt /sbin/grub-install --recheck --no-floppy --root-directory=/ $device
-chroot /mnt /sbin/update-grub
+chroot $MNTPATH /sbin/grub-install --recheck --no-floppy --root-directory=/ $device
+chroot $MNTPATH /sbin/update-grub
 
 echo Unmounting
 for v in dev proc sys tmp media run; do
-        umount /mnt/$v
+        umount $MNTPATH/$v
 done
 sync
-umount /mnt
+umount $MNTPATH
 
 echo Done
