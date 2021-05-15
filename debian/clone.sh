@@ -21,7 +21,7 @@ head -c 512 $1 > /dev/zero || (
 export device=$(losetup --show -fP $1 | tr -d '\n')
 
 echo Wiping drive
-dd if=/dev/zero of=$device
+dd if=/dev/zero of=$device bs=64M count=1
 
 echo Creating partition table
 (
@@ -50,7 +50,7 @@ mount $partition $MNTPATH
 
 echo Copying data
 umask 022
-rsync --links -rv --exclude=$MNTPATH --exclude=$1 --exclude=/dev --exclude=/proc --exclude=/sys --exclude=/media --exclude=/run / $MNTPATH/
+rsync -axHAX --stats --exclude=$MNTPATH --exclude=$1 --exclude=/dev --exclude=/proc --exclude=/sys --exclude=/media --exclude=/run / $MNTPATH/
 
 for v in dev proc sys media run; do
         mkdir $MNTPATH/$v
