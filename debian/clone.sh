@@ -60,7 +60,7 @@ done
 echo Writing new fstab
 (
 echo "# <file system> <mount point>   <type>  <options>       <dump>  <pass>"
-echo -e "UUID=$partition_id \t$FS\tdefaults\t0\t1"
+echo -e "UUID=$partition_id\t/\t$FS\tdefaults\t0\t1"
 ) > $MNTPATH/etc/fstab
 
 echo Installing grub
