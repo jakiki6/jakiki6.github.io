@@ -10,14 +10,14 @@ var startDate = new Date();
 console.log("Are you sure you wanna cheat?\nCheating is bad!");
 
 var birds = [
-	["https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Grundsteinlegung_MiQua-7004_%28cropped%29.jpg/1200px-Grundsteinlegung_MiQua-7004_%28cropped%29.jpg", "armin laschet"]
-	["https://www.die-linke-thl.de/fileadmin/_processed_/c/b/csm_susannehennigwellsow01_97c25950ce.jpg", "susanne hennig-wellsow"]
-	["https://www.zdf.de/assets/janine-wissler-110~2400x1350?cb=1620135466710", "janine wissler"]
-	["https://www.bundestag.de/resource/image/519652/2x3/316/475/1d66837d4b7ec224b7f16272bd99ac58/Il/gauland_alexander_gross.jpg", "dr alexander gauland"]
-	["https://www.tagesspiegel.de/images/klausur-der-spd-bundestagsfraktion/25454112/1-format43.jpg", "saskia esken"]
-	["https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Hart_aber_fair_2018-10-08-8555.jpg/1200px-Hart_aber_fair_2018-10-08-8555.jpg", "norbert walter-borsians"]
-	["https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/2020-02-14_Christian_Lindner_%28Bundestagsprojekt_2020%29_by_Sandro_Halank%E2%80%932.jpg/1200px-2020-02-14_Christian_Lindner_%28Bundestagsprojekt_2020%29_by_Sandro_Halank%E2%80%932.jpg", "christian lindner"]
-	["https://pbs.twimg.com/profile_images/1384073872169861124/sodIypTE_400x400.jpg", "annalena baerbock"]
+	["https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Grundsteinlegung_MiQua-7004_%28cropped%29.jpg/1200px-Grundsteinlegung_MiQua-7004_%28cropped%29.jpg", "armin laschet"],
+	["https://www.die-linke-thl.de/fileadmin/_processed_/c/b/csm_susannehennigwellsow01_97c25950ce.jpg", "susanne hennig-wellsow"],
+	["https://www.zdf.de/assets/janine-wissler-110~2400x1350?cb=1620135466710", "janine wissler"],
+	["https://www.bundestag.de/resource/image/519652/2x3/316/475/1d66837d4b7ec224b7f16272bd99ac58/Il/gauland_alexander_gross.jpg", "dr alexander gauland"],
+	["https://www.tagesspiegel.de/images/klausur-der-spd-bundestagsfraktion/25454112/1-format43.jpg", "saskia esken"],
+	["https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Hart_aber_fair_2018-10-08-8555.jpg/1200px-Hart_aber_fair_2018-10-08-8555.jpg", "norbert walter-borsians"],
+	["https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/2020-02-14_Christian_Lindner_%28Bundestagsprojekt_2020%29_by_Sandro_Halank%E2%80%932.jpg/1200px-2020-02-14_Christian_Lindner_%28Bundestagsprojekt_2020%29_by_Sandro_Halank%E2%80%932.jpg", "christian lindner"],
+	["https://pbs.twimg.com/profile_images/1384073872169861124/sodIypTE_400x400.jpg", "annalena baerbock"],
 	["https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Maischberger_-_2018-06-20-6596.jpg/1200px-Maischberger_-_2018-06-20-6596.jpg", "robert habeck"]
 ]
 var max = birds.length;
